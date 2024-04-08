@@ -1,0 +1,226 @@
+{
+    "swagger":"2.0",
+    "info":{
+        "title":"Zenkit API",
+        "description":"API documentation for zenkit app",
+        "version":"1.0.0"
+    },
+    "schemes":["http","https"],
+    "paths":{
+        "/zenkit/":{
+            "get":{
+                "summary":"Get all tasks",
+                "description":"all tasks",
+                "tags":["Tasks"],
+                "responses":{
+                    "200":{
+                        "description":"A list of all tasks"
+                    },
+                    "400":{
+                        "description":"OPPS......Something went wrong"
+                        }  } },
+             "post":{
+                "summary":"Create a new task",
+                "description":"Create a new task and add it to the database",
+                "tags":["Tasks"],
+                "parameters":[{
+                    "name":"body",
+                    "in":"body",
+                    "description":"Task details",
+                    "required":"true",
+                    "schema":{
+                        "type":"object",
+                        "properties":{
+                            "name": {
+                                "type": "string",
+                                "description": "The name of the task",
+                                "maxLength": 20
+                              },
+                              "description": {
+                                "type": "string",
+                                "description": "The description of the task"
+                              },
+                              "status": {
+                                "type": "string",
+                                "description": "The status of the task",
+                                "enum": ["TODO", "IN_PROGRESS", "COMPLETED", "LATE", "OVERDUE"],
+                                "default": "TODO"
+                              },
+                              "duedate": {
+                                "type": "object",
+                                "properties": {
+                                  "startDate": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "The start date of the task"
+                                  },
+                                  "endDate": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "description": "The end date of the task"
+                                  },
+                                  "startTime": {
+                                    "type": "string",
+                                    "description": "The start time of the task"
+                                  },
+                                  "endTime": {
+                                    "type": "string",
+                                    "description": "The end time of the task"
+                                  },
+                                  "duration": {
+                                    "type": "number",
+                                    "description": "The duration of the task"
+                                  },
+                                  "durationType": {
+                                    "type": "string",
+                                    "description": "The duration type of the task",
+                                    "enum": ["Hours", "Minutes", "Days", "Weeks", "Months"],
+                                    "default": "Days"
+                                  }
+                                }
+                            }
+                        }
+                    }
+                }],
+                "responses":{
+                    "201": {
+                        "description": "Task created"
+                      },
+                      "409": {
+                        "description": "A task with this email already exists."
+                      },
+                      "503": {
+                        "description": "There was an error processing your request. Please try again later."
+                      } 
+                }
+             }           
+},
+"/zenkit/{id}":{
+    "patch":{
+         "summary":"Update a Task by ID",
+         "description":"Update an existing contact in the database",
+         "tags":["Tasks"],
+         "parameters":[{
+            "name":"id",
+            "in":"path",
+            "description":"ID of the task to update",
+            "required":"true",
+            "type":"string"
+            },
+            {
+                "name": "body",
+                "in": "body",
+                "description": "Task details",
+                "required": true,
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the task",
+                        "maxLength": 20
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "The description of the task"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "The status of the task",
+                        "enum": ["TODO", "IN_PROGRESS", "COMPLETED", "LATE", "OVERDUE"],
+                        "default": "TODO"
+                      },
+                      "duedate": {
+                        "type": "object",
+                        "properties": {
+                          "startDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The start date of the task"
+                          },
+                          "endDate": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "The end date of the task"
+                          },
+                          "startTime": {
+                            "type": "string",
+                            "description": "The start time of the task"
+                          },
+                          "endTime": {
+                            "type": "string",
+                            "description": "The end time of the task"
+                          },
+                          "duration": {
+                            "type": "number",
+                            "description": "The duration of the task"
+                          },
+                          "durationType": {
+                            "type": "string",
+                            "description": "The duration type of the task",
+                            "enum": ["Hours", "Minutes", "Days", "Weeks", "Months"],
+                            "default": "Days"
+                          }
+                        }
+                    }
+                  }
+                }
+              }
+         ],
+         "responses":{
+            "200": {
+                "description": "Task updated successfully"
+              },
+              "404": {
+                "description": "Task not found"
+              }
+         }
+    },
+    "delete":{
+                   "summary": "Delete a task by ID",
+                    "description": "Delete a task by ID",
+                    "tags": ["Tasks"],
+                    "parameters": [
+                      {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the task to delete",
+                        "required": true,
+                        "type": "string"
+                      }
+                    ],
+                    "responses": {
+                      "204": {
+                        "description": "Task deleted"
+                      },
+                      "404": {
+                        "description": "Task not found"
+                      }
+                    }
+    },
+    "get":{
+        "summary": "Get a task by ID",
+        "description": "Get a tsk by ID",
+        "tags": ["Tasks"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the task to retrieve",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          },
+          "404": {
+            "description": "Task not found"
+          }
+        }
+    }
+}
+    }
+}
