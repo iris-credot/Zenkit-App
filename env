@@ -1,2 +1,2 @@
-MONGODB_URI=mongodb://localhost:27017/Task_Manager
+MONGODB_URI='mongodb+srv://tetairiscredot:Niwenshuti250@cluster0.kf5osqc.mongodb.net/Zenkit-App?retryWrites=true&w=majority&appName=Cluster0'
 PORT=5000

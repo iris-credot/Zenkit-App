@@ -5,6 +5,7 @@ const cors = require('cors');
 const async= require('express-async-errors');
 const app = express();
 const port= process.env.PORT || 5000;
+const connection = process.env.MONGODB_URI || 'mongodb+srv://tetairiscredot:Niwenshuti250@cluster0.kf5osqc.mongodb.net/Zenkit-App?retryWrites=true&w=majority&appName=Cluster0'
 const assert = require('assert');
 const swaggerUi=require ( 'swagger-ui-express') ;
 const route = require("./routes/taskroutes.js");
@@ -26,7 +27,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerjson));
 
 
 
-mongoose.connect("mongodb://localhost:27017/Task_Manager")
+mongoose.connect(connection)
 .then(() => {
     app.listen(port,()=>{
         console.log("Mongo DB connected....")
