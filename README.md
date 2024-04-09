@@ -20,24 +20,22 @@ This project is a Task Management application built using Node.js, Express.js, a
 npm install
 
 3. Set up MongoDB Atlas:
-
-Create a MongoDB Atlas cluster and database.
-Whitelist your current IP address.
-Get the connection URI.
+   Create a MongoDB Atlas cluster and database.
+   Whitelist your current IP address.
+   Get the connection URI.
 
 4. Create a '.env' file in the root directory.
-   
-   MONGODB_URI=<your-mongodb-uri>
+    MONGODB_URI=<your-mongodb-uri>
    
 5. Start the server.
    npm start
-6.The server will start running at http://localhost:3000.
+6.The server will start running at https://zenkit-app.onrender.com/.
 
-API Endpoints
+## API Endpoints
 GET /tasks: Retrieve all tasks.
 POST /tasks: Create a new task.
 GET /tasks/:id: Retrieve a specific task by ID.
 PATCH /tasks/:id: Update a specific task by ID.
 DELETE /tasks/:id: Delete a specific task by ID.
-Contributors
+## Contributors
 TETA IRIS CREDOT.
