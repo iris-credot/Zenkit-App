@@ -12,7 +12,7 @@ const route = require("./routes/taskroutes.js");
 const swaggerjson= require ('./dos/swagger.json');
 assert.strictEqual(typeof swaggerjson, 'object');
 
-
+//"http://192.168.1.150:8080", "//https://contact-app-client-xbck.onrender.com/"
 app.use(express.json())
 const corsOptions={
     allowedHeaders:["Authorization","Content-Type"],
@@ -22,7 +22,7 @@ const corsOptions={
 
 app.use(cors(corsOptions));
 app.use('/zenkit',route);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerjson));
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerjson));
 
 
 
