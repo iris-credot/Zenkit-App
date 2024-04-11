@@ -14,7 +14,7 @@ createTask: asyncWrapper(async (req, res) => {
   
 }),
 getTask: asyncWrapper(async (req, res, next) => {
-  const { id: taskID } = req.params
+  const { id: taskID } = req.query
   const task = await Task.findOne({ _id: taskID })
   if (!task) {
    return res.status(404).json({ message: 'Contact not found' });
@@ -24,7 +24,7 @@ getTask: asyncWrapper(async (req, res, next) => {
 }),
 
  deleteTask: asyncWrapper(async (req, res, next) => {
-  const { id: taskID } = req.params
+  const { id: taskID } = req.query
   const task = await Task.findOneAndDelete({ _id: taskID })
   if (!task) {
    return res.status(404).json({ message: 'Contact not found' });
@@ -33,7 +33,7 @@ getTask: asyncWrapper(async (req, res, next) => {
 }),
 
  updateTask: asyncWrapper(async (req, res, next) => {
-  const { id: taskID } = req.params
+  const { id: taskID } = req.query
 
   const task = await Task.findOneAndUpdate({ _id: taskID }, req.body, {
     new: true,

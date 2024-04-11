@@ -6,6 +6,6 @@ const router= express.Router();
 
 
 router.route('/').get(taskfunctions.getAllTasks).post(taskfunctions.createTask)
-router.route('/:id').get(taskfunctions.getTask).patch(taskfunctions.updateTask).delete(taskfunctions.deleteTask)
+router.route('/find').get(taskfunctions.getTask).patch(taskfunctions.updateTask).delete(taskfunctions.deleteTask)
 
 module.exports= router;
