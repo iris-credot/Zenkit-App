@@ -95,7 +95,7 @@
                 }
              }           
 },
-"/zenkit/{id}":{
+"/zenkit/find":{
     "patch":{
          "summary":"Update a Task by ID",
          "description":"Update an existing contact in the database",
