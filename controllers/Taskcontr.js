@@ -2,6 +2,7 @@ const Task = require('../model/Task.js')
 const asyncWrapper = require('../middleware/async.js')
 
 
+
 const taskfunctions= {
 getAllTasks: asyncWrapper(async (req, res) => {
   const tasks = await Task.find({})
@@ -21,6 +22,25 @@ getTask: asyncWrapper(async (req, res, next) => {
   }
 
   res.status(200).json({ task })
+}),
+
+searchAny: asyncWrapper(async (req, res, next) => {
+  
+  const  searchResult =await Task.find({
+    $or: [
+      { name: { $regex: query, $options: 'i' } }, // Case-insensitive search by name
+      { description: { $regex: query, $options: 'i' } } // Case-insensitive search by description
+    ]
+  });
+
+  // Check if any tasks were found
+  if (searchResult.length === 0) {
+    // If no tasks were found, send a message indicating no results found
+    return res.status(404).json({ message: 'No tasks found matching the search criteria' });
+  }
+
+  // If tasks were found, send them in the response
+  res.status(200).json({  searchResult })
 }),
 
  deleteTask: asyncWrapper(async (req, res, next) => {
@@ -47,4 +67,4 @@ getTask: asyncWrapper(async (req, res, next) => {
   res.status(200).json({ task })
 })
 }
-module.exports = taskfunctions;
+module.exports = taskfunctions

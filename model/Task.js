@@ -21,11 +21,11 @@ required: true,
   duedate:{
       startDate:{
         type: Date,
-        required:false,
+        required:true,
       },
       endDate:{
         type: Date,
-        required:false,
+        required:true,
       },
       startTime:{
         type: String,
