@@ -5,11 +5,13 @@ const TaskSchema = new mongoose.Schema({
     type: String,
     required: [true, 'must provide name'],
     trim: true,
-    maxlength: [20, 'name can not be more than 20 characters'],
+    maxlength: [30, 'name can not be more than 20 characters'],
+    unique: true
   },
   description:{
 type: String,
 required: true, 
+unique:true
   },
   status: {
     type: String,
@@ -17,7 +19,15 @@ required: true,
     enum: ['TODO', 'IN_PROGRESS', 'COMPLETED', 'LATE', 'OVERDUE'],
     default:"TODO"
   },
-  
+  parentTask: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Task",
+    required: false,
+},
+tags: {
+    type: Array,
+    required: false
+},
   duedate:{
       startDate:{
         type: Date,
@@ -48,7 +58,26 @@ required: true,
       },
       default:"Days"
      }
+  },
+  checklist: [{
+    name: {
+      type: String,
+      required: true,
+  },
+  checked: {
+      type: Boolean,
+      required: true,
+      default: false
   }
+}],
+workload: {
+  type: Number,
+  required: false,
+  default: 0,
+  min: 0,
+  max: 5
+}
+
 });
 
 module.exports = mongoose.model('Task', TaskSchema)

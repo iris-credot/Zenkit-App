@@ -1,16 +1,14 @@
-/**
- * CustomError is a custom error class that extends the built-in Error class.
- * It allows for creating custom error messages and can be used to throw custom errors.
- * @constructor
- * @param {string} message - The error message to be displayed when the error is thrown.
- */
-export default class CustomError extends Error {
-    /**
-     * Constructor for CustomError.
-     * @param {string} message - The error message to be displayed when the error is thrown.
-     */
-    constructor(message) {
-        // Call the superclass constructor with the provided error message.
+ class CustomError extends Error {
+    
+    constructor(message,statusCode) {
+       // calling the constructor of this error class
         super(message);
+        this.statusCode = statusCode;
+        this.status = statusCode >= 400 && statusCode < 500 ? 'fail' : 'error';
+        
+        this.isOperational = true;
+        Error.captureStackTrace(this,this.constructor);
+
     }
 }
+module.exports= CustomError;
