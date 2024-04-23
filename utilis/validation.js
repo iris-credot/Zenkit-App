@@ -27,5 +27,24 @@ name:{
     }
 }
 };
-
-module.exports = {validation};
+const  validationupd = {
+    name:{
+    
+        isLength:{
+            options:{
+                min:3,
+                max:30
+            },
+            errorMessage: "Must be atleast 3-10 characters"
+        },
+        notEmpty:{
+            
+            errorMessage: "Must not be empty"
+        },
+        isString:{
+    
+            errorMessage: "Must be a string"
+        }
+    }
+    };
+module.exports = {validation,validationupd};

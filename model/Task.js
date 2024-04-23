@@ -31,11 +31,11 @@ tags: {
   duedate:{
       startDate:{
         type: Date,
-        required:true,
+        required:false,
       },
       endDate:{
         type: Date,
-        required:true,
+        required:false,
       },
       startTime:{
         type: String,

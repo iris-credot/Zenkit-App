@@ -8,7 +8,11 @@ const rsult = require('../utilis/validation.js');
 
 
 
-router.route('/').get(taskfunctions.getAllTasks).post(setTime,checkSchema(rsult.validation),taskfunctions.addCheckListItem,taskfunctions.createTask)
-router.route('/find').get(taskfunctions.getTask,taskfunctions.findByParentId,taskfunctions.findByStatus,taskfunctions.findByTag).patch(setTime,checkSchema(rsult.validation),taskfunctions.updateCheckListItem,taskfunctions.updateTask).delete(taskfunctions.deleteTask)
+router.route('/').get(taskfunctions.getAllTasks).post(setTime,checkSchema(rsult.validation),taskfunctions.createTask)
+router.route('/find').get(taskfunctions.getTask).patch(setTime,checkSchema(rsult.validationupd),taskfunctions.updateTask).delete(taskfunctions.deleteTask)
+router.route('/addcheck').post(taskfunctions.addCheckListItem).patch(taskfunctions.updateCheckListItem);
+router.get('/bystatus',taskfunctions.findByStatus)
+router.get('/byparent',taskfunctions.findByParentId)
+router.get('/bytag',taskfunctions.findByTag)
 
 module.exports= router;

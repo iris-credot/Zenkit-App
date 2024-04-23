@@ -9,16 +9,21 @@ const taskfunctions = {
     const tasks = await Task.find({})
     res.status(200).json({ tasks })
   }),
+  
   createTask: asyncWrapper(async (req, res, next) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
-      next(new customError(result.array()[0].message));
+       // Instead of sending a response here, pass the error to the next middleware
+       return next(new customError(result.array()[0].msg));
     }
-    const newTask = new Task(req.body);
-    const savedTask = await newTask.save();
-    res.status(201).json(savedTask);
-
-  }),
+   
+       const newTask = new Task(req.body);
+       const savedTask = await newTask.save();
+       // Ensure this is the only response sent for this request
+       res.status(201).json(savedTask);
+    
+   }),
+   
   getTask: asyncWrapper(async (req, res, next) => {
     const { id: taskID } = req.query
     const task = await Task.findOne({ _id: taskID })
@@ -113,7 +118,7 @@ updateCheckListItem:asyncWrapper(async (req, res, next) => {
   updateTask: asyncWrapper(async (req, res, next) => {
     const result = validationResult(req);
     if (!result.isEmpty()) {
-      next(new customError(result.array()[0].msg));
+     return  next(new customError(result.array()[0].msg));
     }
     const { id: taskID } = req.query
 
