@@ -102,7 +102,7 @@
          "tags":["Tasks"],
          "parameters":[{
             "name":"id",
-            "in":"path",
+            "in":"query",
             "description":"ID of the task to update",
             "required":"true",
             "type":"string"
@@ -184,7 +184,7 @@
                     "parameters": [
                       {
                         "name": "id",
-                        "in": "path",
+                        "in": "query",
                         "description": "ID of the task to delete",
                         "required": true,
                         "type": "string"
@@ -206,7 +206,7 @@
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "query",
             "description": "ID of the task to retrieve",
             "required": true,
             "type": "string"
