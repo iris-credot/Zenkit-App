@@ -29,7 +29,7 @@ app.use(express.json())
 /*app.use(corsOther);*/
 app.use('/zenkit',route);
 app.use('/api',router2)
-app.use('/zenkit', swaggerUi.serve, swaggerUi.setup(swaggerjson));
+app.use('/zenkit-api', swaggerUi.serve, swaggerUi.setup(swaggerjson));
 
 mongoose.connect(connection)
 .then(() => {
